@@ -5,6 +5,7 @@
     <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
     <script src="components/random-color.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+
   </head>
 
   <body>
@@ -12,8 +13,8 @@
       <a-assets>
         <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
         <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
-        <a-asset-item id="couch" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/model.gltf"></a-asset-item>
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf"></a-asset-item>
+        <a-asset-item id="fan" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/540%20Ceiling%20Fan.gltf"></a-asset-item>
         <a-asset-item id="room" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/lab0_2.gltf"></a-asset-item>
 
         <!-- OBJ testing files -->
@@ -23,12 +24,6 @@
       </a-assets>
       
       <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
-
-      <!-- Ground Texture -->
-      <!-- <a-cylinder id="ground" src="#groundTexture" radius="30" height="0.1"></a-cylinder> -->
-
-      <!-- Couch Model -->
-      <!-- <a-entity gltf-model="#couch" scale="2 2 2" position="2 3.5 0"></a-entity> -->
 
       <!-- Ceiling Lights -->
       <a-light type="point" color="white" position="3.639 3.281 -11.717" intensity="0.2"></a-light>
@@ -47,7 +42,6 @@
       <a-entity gltf-model="#room" position="-4 0 -4"></a-entity>
 
       <!-- Lab OBJ test -->
-      <!-- <a-obj-model src="#lab-obj" mtl="#lab-mtl" position="-4 0 -4" scale="0.01 0.01 0.01"></a-obj-model> -->
 
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
                   event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
@@ -56,19 +50,15 @@
                 geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
       </a-cylinder>
 
-      <a-cylinder position="-1.5 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+      <a-entity gltf-model="#tv" position="-1.5 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" scale="0.06 0.06 0.06"
                   event-set__enter="_event: mouseenter; _target: #tvText; visible: true"
                   event-set__leave="_event: mouseleave; _target: #tvText; visible: false">
-        <a-text id="tvText" value="This is a smart tv" align="center" color="#FFF" visible="false" position="0 -0.55 0.55"
+        <a-text id="tvText" value="This is a smart tv" align="center" color="#FFF" visible="false" position="15 5 0.55" scale="10 10 10"
                 geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
-      </a-cylinder>
-
-      <a-entity gltf-model="#tv" position="3.051 0.767 -2.518" scale="0.06 0.06 0.06" event-set__enter="_event: mouseenter; _target: #tvText; visible: true"
-                      event-set__leave="_event: mouseleave; _target: #tvText; visible: false" >
-                      <a-text id="tvText" value="This is a Smart TV" scale="10 10 10" align="center" color="#FFF" visible="false" position="19.71 6.904 6.102" geometry="primitive:plane;width:1.75" material="color:#333"></a-text>
       </a-entity>
 
-      <a-box position="-1 1.6 -5" animation="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true" color="tomato"></a-box>
+      <a-entity gltf-model="#fan" position="0.04048 1.77424 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800;">
+      </a-entity>
 
       <a-entity id="blockHand" hand-controls="right" laser-controls></a-entity>
 

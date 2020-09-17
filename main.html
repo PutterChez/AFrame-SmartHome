@@ -3,9 +3,8 @@
   <head>
     <title>AFrame Smart Home</title>
     <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
-    <script src="components/random-color.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <script type="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/cameraListener.js"></script>
+    <script src="cameraListener.js"></script>
   </head>
 
   <body>
@@ -62,7 +61,7 @@
 
       <a-entity id="blockHand" hand-controls="right" laser-controls></a-entity>
 
-      <a-camera id="camera" trigger-on-look-behind="looked-behind" position="0 1.65 0">
+      <a-camera trigger-on-look-behind="Hello, Box!" position="0 1.65 0">
         <a-cursor></a-cursor>
       </a-camera>
 

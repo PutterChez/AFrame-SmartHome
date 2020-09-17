@@ -4,25 +4,39 @@
     <title>AFrame Smart Home</title>
     <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+
+
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
     <script src="cameraListener.js"></script>
   </head>
 
   <body>
-    <a-scene>
+    <a-scene stats="true"
+             environment
+             physics="driver: worker; workerFps: 60;">
+
+
+      <!-- Player -->
+      <a-camera position="0 1.65 0">
+        <a-entity cursor
+                  position="0 0 -0.5"
+                  geometry="primitive: circle; radius: 0.01; segments: 4;"
+                  material="color: #FF4444; shader: flat"></a-entity>
+      </a-camera>
+
+      </a-entity>
+      <a-entity static-body="shape: sphere; sphereRadius: 0.02;" vive-controls="hand: left" sphere-collider="objects: [dynamic-body];" grab></a-entity>
+      <a-entity static-body="shape: sphere; sphereRadius: 0.02;" vive-controls="hand: right" sphere-collider="objects: [dynamic-body];" grab></a-entity>
+
       <a-assets>
-        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
-        <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf"></a-asset-item>
         <a-asset-item id="fan" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/540%20Ceiling%20Fan.gltf"></a-asset-item>
-        <a-asset-item id="room" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/lab0_2.gltf"></a-asset-item>
 
-        <!-- OBJ testing files -->
-        <a-asset-item id="lab-obj" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/lab0_3.obj"></a-asset-item>
-        <a-asset-item id="lab-mtl" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/LabModelPrototype01.mtl"></a-asset-item>
+        <a-asset-item id="room" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/lab0_2.gltf"></a-asset-item>
+        <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/LabPlan.gltf"></a-asset-item>
 
       </a-assets>
-      
-      <a-sky id="background" src="#skyTexture" theta-length="90" radius="30"></a-sky>
 
       <!-- Ceiling Lights -->
       <a-light type="point" color="white" position="3.639 3.281 -11.717" intensity="0.2"></a-light>
@@ -38,9 +52,47 @@
       <a-light type="point" color="white" position="0.942 3.281 -5.0" intensity="0.2"></a-light>
 
       <!-- Lab GLTF -->
-      <a-entity gltf-model="#room" position="-4 0 -4"></a-entity>
+      <a-entity gltf-model="#lab" position="-4 0 -4"></a-entity>
 
-      <!-- Lab OBJ test -->
+
+      <!-- Physics test -->
+      <a-entity position="4 0 -1">
+        <a-text value="Point to Point" position="0 1.5 0" align="center"></a-text>
+        <a-box id="pointtopoint-target"
+               color="#777"
+               position="0 1 0"
+               scale="0.25 0.25 0.25"
+               static-body>
+        </a-box>
+        <a-box color="#F00"
+               position="0.125 0.875 0"
+               scale="0.25 0.25 0.25"
+               dynamic-body
+               constraint="type: pointToPoint;
+                           target: #pointtopoint-target;
+                           pivot: -0.125 -0.125 0.125;
+                           targetPivot: 0.125 -0.125 0.125">
+        </a-box>
+      </a-entity>
+
+      <!-- Terrain -->
+      <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
+
+      <!-- Blocks -->
+      <a-box position="0 0.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
+      <a-box position="1 0.5 -2" color="#d73027" dynamic-body force-pushable></a-box>
+      <a-box position="2 0.5 -2" color="#f46d43" dynamic-body force-pushable></a-box>
+      <a-box position="3 0.5 -2" color="#fdae61" dynamic-body force-pushable></a-box>
+      <a-box position="0 1.5 -2" color="#fee08b" dynamic-body force-pushable></a-box>
+      <a-box position="1 1.5 -2" color="#ffffbf" dynamic-body force-pushable></a-box>
+      <a-box position="2 1.5 -2" color="#d9ef8b" dynamic-body force-pushable></a-box>
+      <a-box position="3 1.5 -2" color="#a6d96a" dynamic-body force-pushable></a-box>
+      <a-box position="0 2.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
+      <a-box position="1 2.5 -2" color="#66bd63" dynamic-body force-pushable></a-box>
+      <a-box position="2 2.5 -2" color="#1a9850" dynamic-body force-pushable></a-box>
+      <a-box position="3 2.5 -2" color="#006837" dynamic-body force-pushable></a-box>
+
+
 
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
                   event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
@@ -58,13 +110,6 @@
 
       <a-entity gltf-model="#fan" position="0.04048 1.77424 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800;">
       </a-entity>
-
-      <a-entity id="blockHand" hand-controls="right" laser-controls></a-entity>
-
-      <a-camera trigger-on-look-behind="Hello, Box!" position="0 1.65 0">
-        <a-cursor></a-cursor>
-      </a-camera>
-
     </a-scene>
   </body>
 </html>

@@ -7,8 +7,9 @@
 
 
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="cameraListener.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.2.5/dist/components/sphere-collider.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
   </head>
 
   <body>
@@ -18,16 +19,21 @@
 
 
       <!-- Player -->
-      <a-camera position="0 1.65 0">
-        <a-entity cursor
+      <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
+        <a-cursor></a-cursor>
+        <!-- <a-entity cursor
                   position="0 0 -0.5"
                   geometry="primitive: circle; radius: 0.01; segments: 4;"
-                  material="color: #FF4444; shader: flat"></a-entity>
-      </a-camera>
+                  material="color: #FF4444; shader: flat"></a-entity> -->
+      </a-entity>
 
       </a-entity>
       <a-entity static-body="shape: sphere; sphereRadius: 0.02;" vive-controls="hand: left" sphere-collider="objects: [dynamic-body];" grab></a-entity>
       <a-entity static-body="shape: sphere; sphereRadius: 0.02;" vive-controls="hand: right" sphere-collider="objects: [dynamic-body];" grab></a-entity>
+
+
+      <!-- Terrain -->
+      <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
 
       <a-assets>
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf"></a-asset-item>
@@ -35,9 +41,25 @@
 
         <a-asset-item id="room" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/lab0_2.gltf"></a-asset-item>
         <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/LabPlan.gltf"></a-asset-item>
-
       </a-assets>
 
+      <!-- Blocks -->
+      <!-- <a-box position="0 0.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
+      <a-box position="1 0.5 -2" color="#d73027" dynamic-body force-pushable></a-box>
+      <a-box position="2 0.5 -2" color="#f46d43" dynamic-body force-pushable></a-box>
+      <a-box position="3 0.5 -2" color="#fdae61" dynamic-body force-pushable></a-box>
+      <a-box position="0 1.5 -2" color="#fee08b" dynamic-body force-pushable></a-box>
+      <a-box position="1 1.5 -2" color="#ffffbf" dynamic-body force-pushable></a-box>
+      <a-box position="2 1.5 -2" color="#d9ef8b" dynamic-body force-pushable></a-box>
+      <a-box position="3 1.5 -2" color="#a6d96a" dynamic-body force-pushable></a-box>
+      <a-box position="0 2.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
+      <a-box position="1 2.5 -2" color="#66bd63" dynamic-body force-pushable></a-box>
+      <a-box position="2 2.5 -2" color="#1a9850" dynamic-body force-pushable></a-box>
+      <a-box position="3 2.5 -2" color="#006837" dynamic-body force-pushable></a-box> -->
+
+      <!-- Lab GLTF -->
+      <a-entity gltf-model="#lab" position="-4 0.1 -4"></a-entity>
+      
       <!-- Ceiling Lights -->
       <a-light type="point" color="white" position="3.639 3.281 -11.717" intensity="0.2"></a-light>
       <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light>
@@ -51,50 +73,8 @@
       <a-light type="point" color="white" position="0.942 3.281 -5.0" intensity="0.2"></a-light>
       <a-light type="point" color="white" position="0.942 3.281 -5.0" intensity="0.2"></a-light>
 
-      <!-- Lab GLTF -->
-      <a-entity gltf-model="#lab" position="-4 0 -4"></a-entity>
-
-
-      <!-- Physics test -->
-      <a-entity position="4 0 -1">
-        <a-text value="Point to Point" position="0 1.5 0" align="center"></a-text>
-        <a-box id="pointtopoint-target"
-               color="#777"
-               position="0 1 0"
-               scale="0.25 0.25 0.25"
-               static-body>
-        </a-box>
-        <a-box color="#F00"
-               position="0.125 0.875 0"
-               scale="0.25 0.25 0.25"
-               dynamic-body
-               constraint="type: pointToPoint;
-                           target: #pointtopoint-target;
-                           pivot: -0.125 -0.125 0.125;
-                           targetPivot: 0.125 -0.125 0.125">
-        </a-box>
-      </a-entity>
-
-      <!-- Terrain -->
-      <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
-
-      <!-- Blocks -->
-      <a-box position="0 0.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
-      <a-box position="1 0.5 -2" color="#d73027" dynamic-body force-pushable></a-box>
-      <a-box position="2 0.5 -2" color="#f46d43" dynamic-body force-pushable></a-box>
-      <a-box position="3 0.5 -2" color="#fdae61" dynamic-body force-pushable></a-box>
-      <a-box position="0 1.5 -2" color="#fee08b" dynamic-body force-pushable></a-box>
-      <a-box position="1 1.5 -2" color="#ffffbf" dynamic-body force-pushable></a-box>
-      <a-box position="2 1.5 -2" color="#d9ef8b" dynamic-body force-pushable></a-box>
-      <a-box position="3 1.5 -2" color="#a6d96a" dynamic-body force-pushable></a-box>
-      <a-box position="0 2.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
-      <a-box position="1 2.5 -2" color="#66bd63" dynamic-body force-pushable></a-box>
-      <a-box position="2 2.5 -2" color="#1a9850" dynamic-body force-pushable></a-box>
-      <a-box position="3 2.5 -2" color="#006837" dynamic-body force-pushable></a-box>
-
-
-
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+      <!-- Furniture -->
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body="shape: box" force-pushable
                   event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
                   event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false">
         <a-text id="cylinderText" value="This is a cylinder" align="center" color="#FFF" visible="false" position="0 -0.55 0.55"
@@ -108,7 +88,7 @@
                 geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
       </a-entity>
 
-      <a-entity gltf-model="#fan" position="0.04048 1.77424 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800;">
+      <a-entity gltf-model="#fan" position="0.04048 3.5 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800;">
       </a-entity>
     </a-scene>
   </body>

@@ -7,9 +7,19 @@
 
 
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <!-- <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.2.5/dist/components/sphere-collider.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.1.0/dist/aframe-physics-system.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
+
+    <!-- Web2VR style -->
+    <style>
+        #html-container{
+            position: absolute;
+            width: 200px;
+            background-color: gainsboro;
+            text-align: center;
+        }
+    </style>
+
   </head>
 
   <body>
@@ -21,41 +31,17 @@
       <!-- Player -->
       <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
         <a-cursor></a-cursor>
-        <!-- <a-entity cursor
-                  position="0 0 -0.5"
-                  geometry="primitive: circle; radius: 0.01; segments: 4;"
-                  material="color: #FF4444; shader: flat"></a-entity> -->
       </a-entity>
-
-      </a-entity>
-      <!-- <a-entity static-body="shape: sphere; sphereRadius: 0.02;" vive-controls="hand: left" sphere-collider="objects: [dynamic-body];" grab></a-entity>
-      <a-entity static-body="shape: sphere; sphereRadius: 0.02;" vive-controls="hand: right" sphere-collider="objects: [dynamic-body];" grab></a-entity>
- -->
 
       <!-- Terrain -->
       <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
 
       <a-assets>
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf"></a-asset-item>
-        <a-asset-item id="fan" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/540%20Ceiling%20Fan.gltf"></a-asset-item>
+        <a-asset-item id="fanModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/540%20Ceiling%20Fan.gltf"></a-asset-item>
 
-        <a-asset-item id="room" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/lab0_2.gltf"></a-asset-item>
-        <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lab2.gltf"></a-asset-item>
+        <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/LabPlan.gltf"></a-asset-item>
       </a-assets>
-
-      <!-- Blocks -->
-      <!-- <a-box position="0 0.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
-      <a-box position="1 0.5 -2" color="#d73027" dynamic-body force-pushable></a-box>
-      <a-box position="2 0.5 -2" color="#f46d43" dynamic-body force-pushable></a-box>
-      <a-box position="3 0.5 -2" color="#fdae61" dynamic-body force-pushable></a-box>
-      <a-box position="0 1.5 -2" color="#fee08b" dynamic-body force-pushable></a-box>
-      <a-box position="1 1.5 -2" color="#ffffbf" dynamic-body force-pushable></a-box>
-      <a-box position="2 1.5 -2" color="#d9ef8b" dynamic-body force-pushable></a-box>
-      <a-box position="3 1.5 -2" color="#a6d96a" dynamic-body force-pushable></a-box>
-      <a-box position="0 2.5 -2" color="#a50026" dynamic-body force-pushable></a-box>
-      <a-box position="1 2.5 -2" color="#66bd63" dynamic-body force-pushable></a-box>
-      <a-box position="2 2.5 -2" color="#1a9850" dynamic-body force-pushable></a-box>
-      <a-box position="3 2.5 -2" color="#006837" dynamic-body force-pushable></a-box> -->
 
       <!-- Lab GLTF -->
       <a-entity gltf-model="#lab" position="-4 0.1 -4"></a-entity>
@@ -88,8 +74,22 @@
                 geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
       </a-entity>
 
-      <a-entity gltf-model="#fan" position="0.04048 2.5 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800;">
+      <a-entity id="fan" gltf-model="#fanModel" position="0.04048 2.5 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800;">
       </a-entity>
+
+      <div id="html-container">
+        Smart Home Fan Test
+        <button id="btn">OFF button</button>
+        <div id="info"></div>
+      </div>
+      <script>
+          document.getElementById("btn").onclick = () => {
+              document.getElementById("info").innerText = "Button Clicked!";
+              document.getElementById("fan").setAttribute("animation", "");
+          };
+          const web2vr = new Web2VR("#html-container", {scale: 1, position: { x: -0.15, y: 2, z: -10.5 }, parentSelector: "#fan" });
+          web2vr.start();
+      </script>
     </a-scene>
   </body>
 </html>

@@ -1,14 +1,18 @@
+var currentEvent = 'rotation-begin';
+
 function turnOffFan () {
 	var fan = document.getElementById("fan");
-	var status = JSON.parse(fan.getAttribute("animation"));
-	console.log(status.loop);
+   
+	console.log(currentEvent);
 
-	if(status.loop == "true"){
-		fan.setAttribute("animation","property: rotation; to: 0 360 0; loop: false; dur: 800;");
-		console.log('turn off');
-	}
-	else{
-		fan.setAttribute("animation","property: rotation; to: 0 360 0; loop: true; dur: 800;");
-		console.log('turn on');
-	}
+    fan.dispatchEvent(new CustomEvent(currentEvent))
+    switch(currentEvent) {
+      case 'rotation-begin':
+      case 'rotation-resume':
+        currentEvent = 'rotation-pause'
+      break
+      case 'rotation-pause':
+        currentEvent = 'rotation-resume'          
+      break  
+    }
 }	

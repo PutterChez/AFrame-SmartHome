@@ -5,11 +5,14 @@
     <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
 
-
+    <!-- AFrame Libaries -->
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+
+    <!-- Javascript -->
     <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/fanButton.js"></script>
 
     <!-- Web2VR style -->
     <style>
@@ -80,7 +83,7 @@
 
       <a-gui-button 
         width="1.5" height="0.5" position="-0.15 2 -10.5"
-        onclick="turnOffFan" key-code="32"
+        onclick="fanButton"
         value="test button"
         font-family="Arial"
         font-size="80px"

@@ -12,7 +12,7 @@
 
     <!-- Javascript -->
     <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/fanToggle.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/fanOff.js"></script>
 
     <!-- Web2VR style -->
     <style>
@@ -43,6 +43,7 @@
       <a-assets>
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf"></a-asset-item>
         <a-asset-item id="fanModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/540%20Ceiling%20Fan.gltf"></a-asset-item>
+        <a-asset-item id="airconModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Air_conditioner_1.gltf"></a-asset-item>
 
         <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/LabPlan2.gltf"></a-asset-item>
       </a-assets>
@@ -79,6 +80,9 @@
       </a-entity>
 
       <a-entity id="fan" gltf-model="#fanModel" position="0.04048 2.5 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800;">
+      </a-entity>
+
+      <a-entity id="aircon" gltf-model="#airconModel" position="-3.6 2.5 -12.3" scale="10 10 10">
       </a-entity>
 
       <a-gui-button 

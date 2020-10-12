@@ -46,11 +46,11 @@
         <a-asset-item id="desk-obj" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.obj"></a-asset-item>
         <a-asset-item id="desk-mtl" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.mtl"></a-asset-item>
 
-        <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.4/LabPlan.gltf"></a-asset-item>
+        <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/LabPlan.obj"></a-asset-item>
       </a-assets>
 
       <!-- Lab GLTF -->
-      <a-entity gltf-model="#lab" position="-4 0.1 -4"></a-entity>
+      <a-entity obj-model="obj:#lab" position="-4 0.1 -4" scale="0.010 0.010 0.010"></a-entity>
       
       <!-- Ceiling Lights -->
       <a-light type="point" color="white" position="3.639 3.281 -11.717" intensity="0.2"></a-light>
@@ -77,9 +77,6 @@
       </a-entity>
 
       <a-entity id="aircon" gltf-model="#airconModel" position="-3.77 2.5 -12.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
-      </a-entity>
-
-      <a-entity id="desk" obj-model="obj: #desk-obj; mtl: #desk-mtl" position="-3.77 2.5 -12.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
       </a-entity>
 
       <a-gui-button 

@@ -6,7 +6,7 @@
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <!-- AFrame Libaries -->
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
@@ -27,9 +27,7 @@
   </head>
 
   <body>
-    <a-scene stats="true"
-             environment
-             physics="driver: worker; workerFps: 60;">
+    <a-scene anti-alias>
 
 
       <!-- Player -->
@@ -38,7 +36,7 @@
       </a-entity> -->
 
       <a-entity movement-controls="fly: true" position="0 0 0">
-        <a-entity camera position="0 1.6 0"></a-entity>
+        <a-entity camera position="userHeight: 1.6"></a-entity>
       </a-entity>
 
       <!-- Terrain -->

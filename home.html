@@ -31,12 +31,23 @@
              physics="driver: worker; workerFps: 60;">
 
 
-      <a-entity id="cameraRig">
-        <a-camera />
-        <a-entity
-          teleport-controls="cameraRig: #cameraRig"
-          gearvr-controls
-         />
+      <!-- Player -->
+      <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 -10">
+        <a-cursor></a-cursor>
+      </a-entity>
+
+      <!-- hand controls -->
+      <a-entity teleport-controls="startEvents: teleportstart; endEvents: teleportend"
+        vive-controls="hand: left"
+        oculus-touch-controls="hand: left"
+        microsoft-motion-controls="hand: left"
+        daydream-controls="left" gearvr-controls="left">
+      </a-entity>
+      <a-entity teleport-controls="startEvents: teleportstart; endEvents: teleportend; type: line"
+        vive-controls="hand: right"
+        microsoft-motion-controls="hand: right"
+        oculus-touch-controls="hand: right"
+        daydream-controls="right" gearvr-controls="right">
       </a-entity>
 
       <!-- Terrain -->

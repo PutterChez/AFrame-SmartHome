@@ -1,118 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>AFrame Smart Home</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <!-- AFrame Libaries -->
-    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
-    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+<head>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+  <a-scene anti-alias>
+    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+    <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+    <a-sky color="#ECECEC"></a-sky>
 
-    <!-- Javascript -->
-    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/fanToggle.js"></script>
-
-    <!-- Web2VR style -->
-    <style>
-        #html-container{
-            position: absolute;
-            width: 200px;
-            background-color: gainsboro;
-            text-align: center;
-        }
-    </style>
-
-  </head>
-
-  <body>
-    <a-scene anti-alias>
-
-
-      <!-- Player -->
-      <!-- <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
-        <a-cursor></a-cursor>
-      </a-entity> -->
-
-      <a-entity movement-controls="fly: true" position="0 0 0">
-        <a-entity camera position="userHeight: 1.6"></a-entity>
-      </a-entity>
-
-      <!-- Terrain -->
-      <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
-
-      <a-assets>
-        <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/TV_01.gltf"></a-asset-item>
-        <a-asset-item id="fanModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/540%20Ceiling%20Fan.gltf"></a-asset-item>
-        <a-asset-item id="airconModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/Air%20conditioner%201.gltf"></a-asset-item>
-        <a-asset-item id="desk-obj" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.obj"></a-asset-item>
-        <a-asset-item id="desk-mtl" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.mtl"></a-asset-item>
-
-        <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.7/LabPlan.gltf"></a-asset-item>
-      </a-assets>
-
-      <!-- Lab GLTF -->
-      <a-entity gltf-model="#lab" position="-4 0.1 -4"></a-entity>
-      
-      <!-- Ceiling Lights -->
-      <a-light type="point" color="white" position="3.639 3.281 -11.717" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light>
-
-      <!-- <a-light type="point" color="white" position="3.639 3.281 -9.8" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -9.8" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -9.8" intensity="0.2"></a-light>
-
-      <a-light type="point" color="white" position="3.639 3.281 -5.0" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -5.0" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -5.0" intensity="0.2"></a-light> -->
-
-      <!-- Furniture -->
-      <a-entity gltf-model="#tv" position="-0.02 0.85 -13.8" rotation="0 0 0" radius="0.5" height="1.5" color="#FFC65D" scale="0.06 0.06 0.06"
-                  event-set__enter="_event: mouseenter; _target: #tvText; visible: true"
-                  event-set__leave="_event: mouseleave; _target: #tvText; visible: false">
-        <a-text id="tvText" value="This is a smart tv" align="center" color="#FFF" visible="false" position="15 5 0.55" scale="10 10 10"
-                geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
-      </a-entity>
-
-      <a-entity id="fan" gltf-model="#fanModel" position="0.04048 2.5 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800; startEvents:rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;">
-      </a-entity>
-
-      <a-entity id="aircon" gltf-model="#airconModel" position="-3.77 2.5 -12.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
-      </a-entity>
-
-      <a-gui-button 
-        width="1.5" height="0.5" position="-0.15 2 -10.5"
-        onclick="turnOffFan"
-        value="Toggle Fan"
-        font-family="Arial"
-        font-size="80px"
-        margin="0 0 0.05 0"
-      >
-      </a-gui-button>
-
-      <script>
-        document.getElementById('fan').addEventListener('pause', function () {
-          document.querySelector('a-animation').setAttribute('from', AFRAME.utils.coordinates.stringify(this.getAttribute('rotation')))
-        })
-      </script>
-
-      <!-- Web2VR Button -->
-
-      <!-- <div id="html-container">
-        Smart Home Fan Test
-        <button id="btn">OFF button</button>
-        <div id="info"></div>
-      </div>
-      <script>
-          document.getElementById("btn").onclick = () => {
-              document.getElementById("info").innerText = "Button Clicked!";
-          };
-          const web2vr = new Web2VR("#html-container", {scale: 200, position: { x: -0.15, y: 2, z: -10.5 } });
-          web2vr.start();
-      </script> -->
-
-    </a-scene>
-  </body>
+    <a-entity movement-controls="fly: true" position="0 0 0">
+      <a-entity camera position="0 1.6 0"></a-entity>
+    </a-entity>
+  </a-scene>
+</body>
 </html>

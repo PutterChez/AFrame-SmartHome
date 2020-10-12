@@ -43,7 +43,8 @@
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/TV_01.gltf"></a-asset-item>
         <a-asset-item id="fanModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/540%20Ceiling%20Fan.gltf"></a-asset-item>
         <a-asset-item id="airconModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/Air%20conditioner%201.gltf"></a-asset-item>
-        <a-asset-item id="deskModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/desk.gltf"></a-asset-item>
+        <a-asset-item id="desk-obj" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/100x100cm%20Desk.obj"></a-asset-item>
+        <a-asset-item id="desk-mtl" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/100x100cm%20Desk.mtl"></a-asset-item>
 
         <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v/LabPlan.gltf"></a-asset-item>
       </a-assets>
@@ -78,7 +79,7 @@
       <a-entity id="aircon" gltf-model="#airconModel" position="-3.77 2.5 -12.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
       </a-entity>
 
-      <a-entity id="model" gltf-model="#deskModel" position="-3.77 2.5 -12.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
+      <a-entity id="desk" obj-model="obj: #desk-obj; mtl: #desk-mtl" position="-3.77 2.5 -12.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
       </a-entity>
 
       <a-gui-button 

@@ -27,15 +27,13 @@
       </a-entity> -->
 
       <!-- Controls -->
-      <a-entity oculus-go-controls="hand: left"></a-entity>
-      <a-entity oculus-go-controls="hand: right"></a-entity>
-
+      
       <a-entity id="cameraRig">
         <!-- camera -->
         <a-entity id="head" camera wasd-controls look-controls></a-entity>
         <!-- hand controls -->
-        <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" oculus-go-controls></a-entity>
-        <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" oculus-go-controls></a-entity>
+        <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" oculus-go-controls="hand: left"></a-entity>
+        <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" oculus-go-controls="hand: right"></a-entity>
       </a-entity>
 
       <!-- Terrain -->

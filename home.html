@@ -29,11 +29,11 @@
       <!-- Controls -->
 
       <a-entity id="cameraRig">
-        <!-- camera -->
-        <a-entity id="head" camera wasd-controls look-controls></a-entity>
-        <!-- hand controls -->
-        <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;" oculus-go-controls></a-entity>
-        <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;" oculus-go-controls></a-entity>
+        <a-camera />
+        <a-entity
+          teleport-controls="cameraRig: #cameraRig"
+          oculus-go-controls
+         />
       </a-entity>
 
       <!-- Terrain -->
@@ -54,18 +54,7 @@
       
       <!-- Ceiling Lights -->
       <a-light type="point" color="white" position="0.10983 1.98602 -9.35577" intensity="0.2" light="castShadow: true"></a-light>
-
-      <!-- <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light> -->
-      <!-- <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light> -->
-
-      <!-- <a-light type="point" color="white" position="3.639 3.281 -9.8" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -9.8" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -9.8" intensity="0.2"></a-light>
-
-      <a-light type="point" color="white" position="3.639 3.281 -5.0" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -5.0" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -5.0" intensity="0.2"></a-light> -->
-
+      
       <!-- Furniture -->
       <a-entity gltf-model="#tv" position="-0.02 0.85 -13.8" rotation="0 0 0" radius="0.5" height="1.5" color="#FFC65D" scale="0.06 0.06 0.06"
                   event-set__enter="_event: mouseenter; _target: #tvText; visible: true"

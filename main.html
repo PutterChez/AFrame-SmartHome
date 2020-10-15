@@ -12,17 +12,6 @@
     <!-- Javascript -->
     <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/fanToggle.js"></script>
-
-    <!-- Web2VR style -->
-    <style>
-        #html-container{
-            position: absolute;
-            width: 200px;
-            background-color: gainsboro;
-            text-align: center;
-        }
-    </style>
-
   </head>
 
   <body>
@@ -32,9 +21,13 @@
 
 
       <!-- Player -->
-      <!-- <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
+      <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
         <a-cursor></a-cursor>
-      </a-entity> -->
+      </a-entity>
+
+      <!-- Controls -->
+      <a-entity oculus-go-controls="hand: left"></a-entity>
+      <a-entity oculus-go-controls="hand: right"></a-entity>
 
       <!-- Terrain -->
       <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
@@ -50,12 +43,13 @@
       </a-assets>
 
       <!-- Lab GLTF -->
-      <a-entity gltf-model="#lab" position="-4 0.1 -4"></a-entity>
+      <a-entity gltf-model="#lab" position="-4 0.1 -4" shadow=""></a-entity>
       
       <!-- Ceiling Lights -->
-      <a-light type="point" color="white" position="3.639 3.281 -11.717" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light>
-      <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light>
+      <a-light type="point" color="white" position="0.10983 1.98602 -9.35577" intensity="0.2" light="castShadow: true"></a-light>
+
+      <!-- <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light> -->
+      <!-- <a-light type="point" color="white" position="0.942 3.281 -11.717" intensity="0.2"></a-light> -->
 
       <!-- <a-light type="point" color="white" position="3.639 3.281 -9.8" intensity="0.2"></a-light>
       <a-light type="point" color="white" position="0.942 3.281 -9.8" intensity="0.2"></a-light>

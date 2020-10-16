@@ -6,12 +6,11 @@
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <!-- AFrame Libaries -->
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.7/dist/aframe-controller-cursor-component.min.js"></script> 
 
     <!-- Javascript -->
-    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/fanToggle.js"></script>
   </head>
 
@@ -33,7 +32,7 @@
       <a-entity id="cameraRig">
         <a-entity camera wasd-controls look-controls></a-entity>
         <a-entity id="rightHand" mixin="teleport" oculus-touch-controls="hand: right"></a-entity>
-        <a-entity id="leftHand" mixin="teleport" oculus-touch-controls="hand: left"></a-entity>
+        <a-entity id="leftHand" controller-cursor oculus-touch-controls="hand: left"></a-entity>
       </a-entity>
 
       <!-- Terrain -->
@@ -44,14 +43,12 @@
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/TV_01.gltf"></a-asset-item>
         <a-asset-item id="fanModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/540%20Ceiling%20Fan.gltf"></a-asset-item>
         <a-asset-item id="airconModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/Air%20conditioner%201.gltf"></a-asset-item>
-        <a-asset-item id="desk-obj" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.obj"></a-asset-item>
-        <a-asset-item id="desk-mtl" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.mtl"></a-asset-item>
 
         <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.7/LabPlan.gltf"></a-asset-item>
       </a-assets>
 
       <!-- Lab GLTF -->
-      <a-entity gltf-model="#lab" position="-4 0.1 -4" shadow=""></a-entity>
+      <a-entity gltf-model="#lab" position="-4 0.1 0" shadow=""></a-entity>
       
       <!-- Ceiling Lights -->
       <a-light type="point" color="white" position="0.10983 1.98602 -9.35577" intensity="0.2" light="castShadow: true"></a-light>

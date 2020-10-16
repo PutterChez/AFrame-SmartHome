@@ -1,79 +1,90 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Teleport Controls - Dynamic</title>
+    <title>AFrame Smart Home</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <!-- AFrame Libaries -->
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web2vr@1.0.0/dist/web2vr.min.js"></script>
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/skygradient.js"></script>
-    <script src="https://rawgit.com/ngokevin/aframe-motion-capture/343f99/dist/aframe-motion-capture.min.js"></script>
+
+    <!-- Javascript -->
+    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/force-pushable.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/fanToggle.js"></script>
   </head>
+
   <body>
-    <script>
-      AFRAME.registerComponent('delayedmeshes', {
-        init: function () {
-          var parentEl = this.el;
-          var i = 0;
+    <a-scene environment>
 
-          setInterval(function () {
-            var childEl = document.createElement('a-entity');
-            childEl.setAttribute('mixin', i % 2 === 0 ? 'box' : 'sphere');
-            childEl.setAttribute('position', {x: 0, y: i, z: -1.4 * i});
-            parentEl.appendChild(childEl);
-            i++;
-          }, 750);
-        }
-      });
 
-      AFRAME.registerComponent('randomcolor', {
-        init: function () {
-          this.el.setAttribute('material', 'color', getRandomColor());
+      <!-- Player -->
+      <!-- <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
+        <a-cursor></a-cursor>
+      </a-entity> -->
 
-          function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++ ) {
-              color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-          }
-        }
-      });
-    </script>
-
-    <a-scene avatar-recorder>
-      <a-assets>
-        <a-mixin id="box"
-          geometry="primitive: box; width: 2; height: 0.5; depth: 0.5"
-          randomcolor
-        ></a-mixin>
-        <a-mixin id="sphere"
-          geometry="primitive: sphere; radius: 0.5"
-          randomcolor
-        ></a-mixin>
-      </a-assets>
-
-      <!-- Scene geometry. -->
-      <a-entity id="sky"
-        geometry="primitive: sphere; radius: 65;"
-        material="shader: skyGradient; colorTop: #aaa; colorBottom: #fff; side: back"
-      ></a-entity>
-      <a-entity id="floor"
-        rotation="-90 0 0"
-        geometry="primitive: plane; width: 100; height: 100"
-        material="src: url(floor.jpg); repeat: 80 80"
-      ></a-entity>
-
-      <a-entity delayedmeshes></a-entity>
+      </a-entity> -->
 
       <!-- Hand controls. -->
       <a-mixin id="teleport"
-        teleport-controls="type: parabolic; cameraRig: #cameraRig; collisionEntities: [mixin='box'],[mixin='sphere']; button: trigger;"
+        teleport-controls="type: parabolic; cameraRig: #cameraRig; button: trigger;"
       ></a-mixin>
       <a-entity id="cameraRig">
         <a-entity camera wasd-controls look-controls></a-entity>
         <a-entity id="rightHand" mixin="teleport" oculus-touch-controls="hand: right"></a-entity>
         <a-entity id="leftHand" mixin="teleport" oculus-touch-controls="hand: left"></a-entity>
       </a-entity>
+
+      <!-- Terrain -->
+      <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
+
+
+      <a-assets>
+        <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/TV_01.gltf"></a-asset-item>
+        <a-asset-item id="fanModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/540%20Ceiling%20Fan.gltf"></a-asset-item>
+        <a-asset-item id="airconModel" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/Air%20conditioner%201.gltf"></a-asset-item>
+        <a-asset-item id="desk-obj" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.obj"></a-asset-item>
+        <a-asset-item id="desk-mtl" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.5/100Desk.mtl"></a-asset-item>
+
+        <a-asset-item id="lab" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.7/LabPlan.gltf"></a-asset-item>
+      </a-assets>
+
+      <!-- Lab GLTF -->
+      <a-entity gltf-model="#lab" position="-4 0.1 -4" shadow=""></a-entity>
+      
+      <!-- Ceiling Lights -->
+      <a-light type="point" color="white" position="0.10983 1.98602 -9.35577" intensity="0.2" light="castShadow: true"></a-light>
+      
+      <!-- Furniture -->
+      <a-entity gltf-model="#tv" position="-0.02 0.85 -13.8" rotation="0 0 0" radius="0.5" height="1.5" color="#FFC65D" scale="0.06 0.06 0.06"
+                  event-set__enter="_event: mouseenter; _target: #tvText; visible: true"
+                  event-set__leave="_event: mouseleave; _target: #tvText; visible: false">
+        <a-text id="tvText" value="This is a smart tv" align="center" color="#FFF" visible="false" position="15 5 0.55" scale="10 10 10"
+                geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
+      </a-entity>
+
+      <a-entity id="fan" gltf-model="#fanModel" position="0.04048 2.5 -11.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800; startEvents:rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;">
+      </a-entity>
+
+      <a-entity id="aircon" gltf-model="#airconModel" position="-3.77 2.5 -12.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
+      </a-entity>
+
+      <a-gui-button 
+        width="1.5" height="0.5" position="-0.15 2 -10.5"
+        onclick="turnOffFan"
+        value="Toggle Fan"
+        font-family="Arial"
+        font-size="80px"
+        margin="0 0 0.05 0"
+      >
+      </a-gui-button>
+
+      <script>
+        document.getElementById('fan').addEventListener('pause', function () {
+          document.querySelector('a-animation').setAttribute('from', AFRAME.utils.coordinates.stringify(this.getAttribute('rotation')))
+        })
+      </script>
     </a-scene>
   </body>
 </html>

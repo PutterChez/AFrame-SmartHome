@@ -28,16 +28,27 @@
 
       <!-- Controls -->
 
-      <a-entity id="cameraRig">
+      <!-- <a-entity id="cameraRig">
         <a-camera />
         <a-entity
           teleport-controls="cameraRig: #cameraRig"
           oculus-go-controls
          />
+      </a-entity> -->
+
+      <!-- Hand controls. -->
+      <a-mixin id="teleport"
+        teleport-controls="type: parabolic; cameraRig: #cameraRig; button: trigger;"
+      ></a-mixin>
+      <a-entity id="cameraRig">
+        <a-entity camera wasd-controls look-controls></a-entity>
+        <a-entity id="rightHand" mixin="teleport" oculus-touch-controls="hand: right"></a-entity>
+        <a-entity id="leftHand" mixin="teleport" oculus-touch-controls="hand: left"></a-entity>
       </a-entity>
 
       <!-- Terrain -->
       <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
+
 
       <a-assets>
         <a-asset-item id="tv" src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/TV_01.gltf"></a-asset-item>

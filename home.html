@@ -29,8 +29,10 @@
       <a-mixin id="teleport"
         teleport-controls="type: parabolic; cameraRig: #cameraRig; button: trigger;"
       ></a-mixin>
-      <a-entity id="cameraRig">
-        <a-entity camera wasd-controls look-controls></a-entity>
+      <a-entity id="cameraRig" position="0 1.6 0">
+        <a-entity camera wasd-controls look-controls>
+          <a-cursor></a-cursor>
+        </a-entity>
         <a-entity id="rightHand" mixin="teleport" oculus-touch-controls="hand: right"></a-entity>
         <a-entity id="leftHand" controller-cursor oculus-touch-controls="hand: left"></a-entity>
       </a-entity>
@@ -50,7 +52,7 @@
 
       <!-- Lab GLTF -->
       <a-entity id="labAll" position="0 0 3.75">
-        <a-entity gltf-model="#lab" position="-4 0.1 0" shadow=""></a-entity>
+        <a-entity gltf-model="#lab" position="-4 0.1 0" ></a-entity>
         
         <!-- Ceiling Lights -->
         <a-light type="point" color="orange" position="0.10983 1.98602 -5.35577" intensity="0.2" light="castShadow: true"></a-light>
@@ -63,23 +65,23 @@
                   geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
         </a-entity>
 
-        <a-entity id="fan" gltf-model="#fanModel" position="0.04048 2.5 -7.51157" scale="0.005 0.005 0.005" rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800; startEvents:rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;">
-        </a-entity>
+        <a-entity>
+          <a-entity id="fan" gltf-model="#dysonModel" position="0.9 0 -4.3" rotation="0 90 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 1000; startEvents:rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"></a-entity>
 
-        <a-entity id="dyson" gltf-model="#dysonModel" position="0.9 0 -4.3" rotation="0 90 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 800; startEvents:rotation-begin; pauseEvents: rotation-pause; resumeEvents: rotation-resume;"></a-entity>
+          <a-gui-button id="fanButton"
+          width="0.75" height="0.25" position="0.9 1.1 -4.4"
+          onclick="turnOffFan"
+          value="Toggle Fan"
+          font-family="Arial"
+          font-size="30px"
+          margin="0 0 0.05 0"
+        >
+        </a-gui-button>
+        </a-entity>
 
         <a-entity id="aircon" gltf-model="#airconModel" position="-3.77 2.5 -8.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
         </a-entity>
 
-        <a-gui-button 
-          width="1.5" height="0.5" position="-0.15 2 -6.5"
-          onclick="turnOffFan"
-          value="Toggle Fan"
-          font-family="Arial"
-          font-size="80px"
-          margin="0 0 0.05 0"
-        >
-        </a-gui-button>
       </a-entity>
 
       <script>

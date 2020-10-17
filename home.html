@@ -7,21 +7,26 @@
     <!-- AFrame Libaries -->
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
     <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.7/dist/aframe-controller-cursor-component.min.js"></script> 
+
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
 
     <!-- Javascript -->
     <script src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/fanToggle.js"></script>
   </head>
 
   <body>
-    <a-scene environment>
+    <a-scene environment physics="gravity: -1.6" renderer="antialias: true">
 
 
       <!-- Player -->
-      <!-- <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
+     <!--  <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.65 0">
         <a-cursor></a-cursor>
       </a-entity> -->
+
 
       <!-- Hand controls. -->
       <a-mixin id="teleport"
@@ -29,12 +34,16 @@
       ></a-mixin>
       <a-entity id="cameraRig">
         <a-entity camera wasd-controls look-controls></a-entity>
-        <a-entity id="rightHand" mixin="teleport" oculus-touch-controls="hand: right"></a-entity>
+        <a-entity id="rightHand" static-body="shape: sphere; sphereRadius: 0.02;"
+          vive-controls="hand: right"
+          sphere-collider="objects: .throwable"
+          grab oculus-touch-controls="hand: right">    
+        </a-entity>
         <a-entity id="leftHand" controller-cursor oculus-touch-controls="hand: left"></a-entity>
       </a-entity>
 
       <!-- Terrain -->
-      <a-box width="75" height="0.1" depth="75" static-body visible="false"></a-box>
+      <a-box width="75" height="0.1" depth="75" static-body visible="false" static-body></a-box>
 
 
       <a-assets>
@@ -48,13 +57,13 @@
 
       <!-- Lab GLTF -->
       <a-entity id="labAll" position="0 0 3.75">
-        <a-entity gltf-model="#lab" position="-4 0.1 0" ></a-entity>
+        <a-entity gltf-model="#lab" position="-4 0.1 0"></a-entity>
         
         <!-- Ceiling Lights -->
         <a-light type="point" color="orange" position="0.10983 1.98602 -5.35577" intensity="0.2" light="castShadow: true"></a-light>
         
         <!-- Furniture -->
-        <a-entity gltf-model="#tv" position="-0.02 0.85 -9.8" rotation="0 0 0" radius="0.5" height="1.5" color="#FFC65D" scale="0.06 0.06 0.06"
+        <a-entity gltf-model="#tv" position="3.466 0.85 -1.25" rotation="0 -140 0" radius="0.5" height="1.5" color="#FFC65D" scale="0.06 0.06 0.06"
                     event-set__enter="_event: mouseenter; _target: #tvText; visible: true"
                     event-set__leave="_event: mouseleave; _target: #tvText; visible: false">
           <a-text id="tvText" value="This is a smart tv" align="center" color="#FFF" visible="false" position="15 5 0.55" scale="10 10 10"
@@ -77,6 +86,14 @@
 
         <a-entity id="aircon" gltf-model="#airconModel" position="-3.77 2.5 -8.3" scale="0.0025 0.0025 0.0025" rotation="0 90 0">
         </a-entity>
+
+        <a-sphere
+          class="throwable"
+          dynamic-body
+          position="0 2.4 0"
+          radius="0.10"
+          color="green"
+        ></a-sphere>
 
       </a-entity>
 
